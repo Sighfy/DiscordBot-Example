@@ -4,6 +4,8 @@ Cogs are essentially classes that are designed to be read and subsequently regis
 Below I have written a basic ping, help, and info command.
 
 I've also used the comments to remove items and parts. Feel free to uncomment to play around with how it displays.
+
+All of the commands here are the standard prefix commands
 """
 import discord
 from discord.ext import commands
@@ -16,7 +18,6 @@ class tools(commands.Cog):
     # We want to initialize the bot interaction to be used later on
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-
 
     @commands.command(name='ping')
     #async def ping(self, ctx: commands.Context, *, text: str):
@@ -71,13 +72,12 @@ class tools(commands.Cog):
         # guilds documentation
         # https://discordpy.readthedocs.io/en/stable/api.html#discord.Guild
 
-    # Basic error handling
+    '''# Basic error handling
     # This will send the error message as the reponse to discord and raise an error in console
     @help.error()
-    async def giveaway_error(self, ctx, error):
+    async def giveaway_error(self, error, ctx):
         await ctx.send(error)
-        raise error
+        raise error'''
 
-# As stated above, this setup definition is a must as it ends what is inside the cog.
-def setup(bot: commands.Bot):
-  bot.add_cog(tools(bot))
+async def setup(bot: commands.Bot):
+    await bot.add_cog(tools(bot))

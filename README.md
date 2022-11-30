@@ -1,2 +1,2 @@
 # DiscordBot-Example
-A small example discord bot using discord.py 1.7.3
+A small example discord bot using discord.py 2.1.0
