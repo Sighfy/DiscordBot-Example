@@ -31,8 +31,8 @@ class tools(commands.Cog):
     @commands.bot_has_permissions(send_messages=True)
     async def help(self, ctx: commands.Context):
         '''Show a useful help menu'''
-        bot_pfp = self.bot.user.avatar_url
-        user_pfp = ctx.message.author.avatar_url
+        bot_pfp = self.bot.user.avatar
+        user_pfp = ctx.message.author.avatar
         # This is how you build an embeded messsage. Play arounf with the inline option to see how to format the embed.
         embed = discord.Embed(title='Help Menu', description='Not much to see here', timestamp=datetime.utcnow(), color=discord.Color.blurple())
         embed.set_author(name=f'{ctx.author}', icon_url=user_pfp)
@@ -50,8 +50,8 @@ class tools(commands.Cog):
     @commands.command(name='info')
     async def info(self, ctx: commands.Context):
         '''Show a useful info menu'''
-        bot_pfp = self.bot.user.avatar_url
-        user_pfp = ctx.message.author.avatar_url
+        bot_pfp = self.bot.user.avatar
+        user_pfp = ctx.message.author.avatar
         guild_creation = str(ctx.guild.created_at).split()[0] # will only show data and not time
         current_utc = datetime.utcnow().strftime("%m/%d/%Y, %H:%M:%S") # shows the current time in UTC format
     
@@ -71,13 +71,6 @@ class tools(commands.Cog):
 
         # guilds documentation
         # https://discordpy.readthedocs.io/en/stable/api.html#discord.Guild
-
-    '''# Basic error handling
-    # This will send the error message as the reponse to discord and raise an error in console
-    @help.error()
-    async def giveaway_error(self, error, ctx):
-        await ctx.send(error)
-        raise error'''
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(tools(bot))

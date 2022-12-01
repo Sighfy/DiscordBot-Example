@@ -7,9 +7,11 @@ class Listeners(commands.Cog, name="listener"):
         self.bot = bot
 
     @commands.Cog.listener('on_message')
-    # This is how commands are made
+    # This is how listener(s)
     # on_message acts as a listener to all messages
-    # This is not ideal in 2.0.0 but in 1.7.3 this will suffice for a small private bot
+    # While it is possible to have multiple listeners there can only be one on_message listener.
+    # What this means is that if you have multiple message items you want to listen to, you will have to stack them here.
+    # This is also why I prefer to have an entire file dedicated to just this listener
     async def on_message(self, message: discord.Message):
         # We do not want the bot to reply to itself or other bots
         if message.author == self.bot.user:
