@@ -25,28 +25,6 @@ class tools(commands.Cog):
         '''Get the bot's current latency.'''
         await ctx.send(f'Pong! {round(self.bot.latency * 1000)}ms')
 
-    # Register and name the specific command
-    @commands.command(name='help')
-    # One of the many checks that can be used. IF the bot does not have permission to send messages, it will raise an error
-    @commands.bot_has_permissions(send_messages=True)
-    async def help(self, ctx: commands.Context):
-        '''Show a useful help menu'''
-        bot_pfp = self.bot.user.avatar
-        user_pfp = ctx.message.author.avatar
-        # This is how you build an embeded messsage. Play arounf with the inline option to see how to format the embed.
-        embed = discord.Embed(title='Help Menu', description='Not much to see here', timestamp=datetime.utcnow(), color=discord.Color.blurple())
-        embed.set_author(name=f'{ctx.author}', icon_url=user_pfp)
-        embed.add_field(name='Field 1', value='test1', inline=True)
-        embed.add_field(name='Field 2', value='test2', inline=False)
-        embed.add_field(name='Field 3', value='test3', inline=False)
-        embed.set_footer(text='footer text', icon_url=bot_pfp)
-        embed.set_thumbnail(url='https://i.insider.com/602ee9ced3ad27001837f2ac?width=2000&format=jpeg&auto=webp')
-
-        # This is similar to print, but will send the response to discord as a response to the command invokation.
-        # In this case it is an embed
-        # Using reply instead of send will have the bot reply to whoever invoked the message
-        await ctx.reply(embed=embed)
-
     @commands.command(name='info')
     async def info(self, ctx: commands.Context):
         '''Show a useful info menu'''
