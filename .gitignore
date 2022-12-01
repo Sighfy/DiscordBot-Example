@@ -150,7 +150,7 @@ cython_debug/
 .vscode/
 
 # Project
-config
+#config
 
 # MacOS (should be included in your local .gitignore)
 .DS_Store
