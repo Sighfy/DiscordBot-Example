@@ -34,6 +34,7 @@ class Bot(commands.Bot):
         # This can easily be moved to a different function in another cog.
         # I recomend creating a sync, unsync, and resync command.
         # But for now, this will do for the example.
+        # Disclaimer: It can take 24hours for slash commands to populate. Many times its only a few minutes, but keep this in mind.
         print("syncing tree")
         await self.tree.sync()
 
