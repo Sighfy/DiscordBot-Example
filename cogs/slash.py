@@ -23,8 +23,8 @@ class slash(commands.Cog, name="slash"):
         await interaction.response.send_message(content=f"{question}", allowed_mentions=discord.AllowedMentions(everyone=False, users=True, roles=False))
         message = await interaction.original_response()
         # the easest way to get information from a poll is by using the reactions in discord. Of course reactions can be used anywhere, but it's easy to show an example with a poll
-        await message.add_reaction(":arrow_up:")
-        await message.add_reaction(":arrow_down:")
+        await message.add_reaction("⬆️")
+        await message.add_reaction("⬇️")
     
 async def setup(bot:commands.Bot):
     await bot.add_cog(slash(bot))
