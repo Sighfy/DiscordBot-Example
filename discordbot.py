@@ -1,5 +1,5 @@
 """
-Example Discord bot using Discord.py 1.7.3
+Example Discord bot using Discord.py 2.1.0
 To run the newest features including app commands, modals, buttons, and more be sure to use Discord.py 2.0.0 or greater
 Some library calls will need to be edited to suppor this change, so be sure to look at the breaking changes documentation here:
 https://discordpy.readthedocs.io/en/stable/migrating.html
@@ -8,17 +8,18 @@ https://discordpy.readthedocs.io/en/stable/migrating.html
 import discord
 from discord.ext import commands
 from os import listdir
-from os.path import dirname, abspath, join
+from os.path import dirname, abspath, join, splitext
+from json import load
 
 class Bot(commands.Bot):
     def __init__(self):
         super().__init__(
             allowed_mentions=discord.AllowedMentions(everyone=True),
-			case_insensitive = True, 
-			command_prefix = ["dpy "], 
-			strip_after_prefix = True,
-			intents = discord.Intents.all()
-		)
+            case_insensitive = True, 
+            command_prefix = ["dpy "], 
+            strip_after_prefix = True,
+            intents = discord.Intents.all()
+        )
 
     # Called on run sequence
     async def on_ready(self):
@@ -34,8 +35,6 @@ class Bot(commands.Bot):
 
     async def setup_hook(self):
         '''Initialize the cogs'''
-        root_dir = dirname(abspath(__file__))
-        cogs_dir = join(root_dir, "cogs")
         # Iterate through the folder 'cogs' to find any files named tools
         cogs = [f"cogs.{filename[:-3]}" for filename in listdir(cogs_dir) if filename.endswith(".py")]
         for cog in cogs:
@@ -44,11 +43,36 @@ class Bot(commands.Bot):
         
         self.loop.create_task(self.startup())
 
+
+def cred(file: str) -> dict:
+    with open(join(config_dir, file), "r") as f:
+        return load(f)
+
+def load_config() -> dict:
+    config = dict()
+    for file in listdir(config_dir):
+        filename, ext = splitext(file)
+        if ext == ".json":
+            config[filename] = cred(file)
+    return config
+
 # Starting point for the bot to allow cogs to be loaded in.
 if __name__=='__main__':
     bot = Bot()
+
+    #create the directory locations
+    root_dir = dirname(abspath(__file__))
+    cogs_dir = join(root_dir, "cogs")
+    config_dir = join(root_dir, "config")
+    
+    # How to load the config into the bot to be used to the token
+    # - Create a folder in the current directory called config
+    # - Create token.json and add your bot token in the file
+    bot.config = load_config()
+
+    # We will be making our own help menu, remove the default
     bot.remove_command('help')
 
     # This allows the bot to start and connect to the discord api registering it.
     # It would be best to keep the bot token in an env
-    bot.run('')  
+    bot.run(bot.config["token"]["token"])  
