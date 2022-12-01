@@ -1,5 +1,5 @@
 """
-Please check out cmds.py before this when learning.
+Please check out tools.py before this when learning.
 
 Hybrid commands are commands that will work as both prefix and app commands.
 They are usually written the same as prefix commands, however they do have different restrictions and sometimes you will also need ti import the app commands to deal with error checking and app command specific items.
