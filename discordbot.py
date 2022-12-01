@@ -30,7 +30,12 @@ class Bot(commands.Bot):
     async def startup(self):
         """Anything that needs to be ran on start"""
         await self.wait_until_ready()
-        #await self.tree.sync()
+        # Usually not a good idea to handle tree syncing automatically on start.
+        # This can easily be moved to a different function in another cog.
+        # I recomend creating a sync, unsync, and resync command.
+        # But for now, this will do for the example.
+        print("syncing tree")
+        await self.tree.sync()
 
 
     async def setup_hook(self):
@@ -40,10 +45,10 @@ class Bot(commands.Bot):
         for cog in cogs:
             # Load the commands in each file to the bot
             await bot.load_extension(cog)
-        
+        # allow an area for startup tasks to be created
         self.loop.create_task(self.startup())
 
-
+# These two functions below serve as the config loader
 def cred(file: str) -> dict:
     with open(join(config_dir, file), "r") as f:
         return load(f)
