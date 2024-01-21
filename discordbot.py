@@ -81,4 +81,4 @@ if __name__=='__main__':
 
     # This allows the bot to start and connect to the discord api registering it.
     # It would be best to keep the bot token in an env
-    bot.run(bot.config["token"]["token"])  
+    bot.run(token=bot.config["config"]["token"])  
