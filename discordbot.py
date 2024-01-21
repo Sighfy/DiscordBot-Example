@@ -1,10 +1,6 @@
 """
-Example Discord bot using Discord.py 2.1.0
-To run the newest features including app commands, modals, buttons, and more be sure to use Discord.py 2.0.0 or greater
-Some library calls will need to be edited to suppor this change, so be sure to look at the breaking changes documentation here:
-https://discordpy.readthedocs.io/en/stable/migrating.html
+Example Discord bot using Discord.py 2.3.2
 """
-
 import discord
 from discord.ext import commands
 from os import listdir
