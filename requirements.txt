@@ -1,4 +1,4 @@
 # -- Usage -- 
 # $ pip install -r requirements.txt
 
-discord.py == 2.1.0
+discord.py == 2.3.2
